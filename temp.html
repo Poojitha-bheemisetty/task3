@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Temperature Converter</title>
+    <style type="text/css">
+      body{
+        background-image: url('https://source.unsplash.com/1600x900/?temperature');
+      }
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+input[type=number] {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+select {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  font-size: 16px;}
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+#result {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+    </style>
+  </head>
+  <body>
+    <h1 align="center">Temperature Converter</h1>
+    <form>
+      <label>Enter temperature:</label>
+      <input type="number" id="temp" name="temp" required><br><br>
+      
+      <label>From:</label>
+      <select id="from" name="from">
+        <option value="°F">Fahrenheit (°F)</option>
+        <option value="°C">Celsius (°C)</option>
+        <option value="K">Kelvin (K)</option>
+      </select><br><br>
+      
+      <label>To:</label>
+      <select id="to" name="to">
+        <option value="°F">Fahrenheit (°F)</option>
+        <option value="°C">Celsius (°C)</option>
+        <option value="K">Kelvin (K)</option>
+      </select><br><br>
+      
+      <button type="button" onclick="convertTemperature()">Convert</button>
+    </form>
+    
+    <p id="result"></p>
+    
+    <script>
+      function convertTemperature() {
+        var temp = parseFloat(document.getElementById("temp").value);
+        var from = document.getElementById("from").value;
+        var to = document.getElementById("to").value;
+        if (from === "°F") {
+          if (to === "°C") {
+            temp = (temp - 32) * (1.8);
+          } else if (to === "K") {
+            temp = (temp - 32) * (1.8) + 273.15;
+          }
+        } else if (from === "°C") {
+          if (to === "°F") {
+            temp = temp *(1.8) + 32;
+          } else if (to === "K") {
+            temp = temp + 273.15;
+          }
+        } else if (from === "K") {
+          if (to === "°F") {
+            temp = (temp - 273.15) * (1.8) + 32;
+          } else if (to === "°C") {
+            temp = temp - 273.15;
+          }
+        }
+        
+        document.getElementById("result").innerHTML = temp.toFixed(4) + "  " + to;
+      }
+    </script>
+  </body>
+</html>
